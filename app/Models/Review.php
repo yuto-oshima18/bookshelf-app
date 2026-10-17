@@ -10,12 +10,25 @@ class Review extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
+        'book_id',
+        'user_id',
+        'rating',
+        'comment',
     ];
 
-    public function users()
+    public function books()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsTo(Book::class);
+    }
+
+        public function likedReviews()
+    {
+        return $this->belongsToMany(
+            User::class,
+            'review_user',
+            'review_id',
+            'user_id'
+        )->withTimestamps();
     }
 
 }

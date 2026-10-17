@@ -29,8 +29,13 @@ class Book extends Model
         return $this->hasMany(Review::class);
     }
 
-    public function users()
+        public function favoriteBooks()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(
+            User::class,
+            'book_user',
+            'book_id',
+            'user_id'
+        )->withTimestamps();
     }
 }
